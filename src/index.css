@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+}
+
+/* Animations */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-6px); }
+  20%, 40%, 60%, 80% { transform: translateX(6px); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translate(-50%, 10px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.animate-shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Print styles for thermal ticket 58mm */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .ticket-print, .ticket-print * {
+    visibility: visible;
+  }
+  .ticket-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 58mm;
+  }
+  @page {
+    margin: 0;
+    size: 58mm auto;
+  }
+}
+
+/* Ticket base styles — optimized for 58mm thermal printer (384 dots, ~48mm usable) */
+.ticket-print {
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-size: 11px;
+  line-height: 1.35;
+  color: #000;
+  width: 58mm;
+  background: #fff;
+  padding: 2mm;
+  box-sizing: border-box;
+}
